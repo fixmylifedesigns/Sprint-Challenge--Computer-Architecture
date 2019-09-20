@@ -159,6 +159,10 @@ class CPU:
                 print(self.reg[operand_a])
                 self.pc += 2
 
+            # elif ir == MUL or CMP:
+            #     self.alu(f"{ir}", operand_a, operand_b)
+            #     self.pc += 3
+
             elif ir == MUL:
                 self.alu("MUL", operand_a, operand_b)
                 self.pc += 3
