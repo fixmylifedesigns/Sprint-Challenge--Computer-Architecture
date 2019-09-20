@@ -144,8 +144,7 @@ class CPU:
         
             operand_a = self.ram_read(self.pc + 1)
             operand_b = self.ram_read(self.pc + 2)
-            reg = self.ram_read(self.pc + 1)
-            # register = self.reg[self.ram_read(self.pc + 1)]
+            # register = self.reg[operand_a]
 
         #     try:
         #         operation_output = self.commands[ir](operand_a, operand_b)
@@ -157,8 +156,7 @@ class CPU:
                 self.pc += 3
 
             elif ir == PRN:
-                # reg = self.ram_read(self.pc + 1)
-                print(self.reg[reg])
+                print(self.reg[operand_a])
                 self.pc += 2
 
             elif ir == MUL:
@@ -170,20 +168,17 @@ class CPU:
                 self.pc += 3
             
             elif ir == JMP:
-                register = self.reg[self.ram_read(self.pc + 1)]
-                self.pc = register
+                self.pc = self.reg[operand_a]
             
             elif ir == JEQ:
-                register = self.reg[self.ram_read(self.pc + 1)]
                 if self.fl[-1] == 1:
-                    self.pc = register
+                    self.pc = self.reg[operand_a]
                 else:
                     self.pc += 2
 
             elif ir == JNE:
-                register = self.reg[self.ram_read(self.pc + 1)]
                 if self.fl[-1] == 0:
-                    self.pc = register
+                    self.pc = self.reg[operand_a]
                 else:
                     self.pc += 2
 
